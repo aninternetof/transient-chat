@@ -19,21 +19,21 @@
 
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css">
-    
+
     <!-- import the webpage's client-side javascript file -->
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/client.js" defer></script>
+    <script src="/main.js" defer></script>
   </head>
   <body>
     <div id="app">
       <div id="chat" class="inner" >
-        
+
       </div>
       <div class="inner">
-        
+
       <label>Enter your name:</label>
       <input type="text" id="nameInput"/></div>
-      
+
       <form id="chatInputForm" class="inner" onsubmit="event.preventDefault();"><label>Enter your message:</label>
         <input type="text" id="chatInput" autocomplete="off" />
         <input type="submit" id="chatSubmit" />

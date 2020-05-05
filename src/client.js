@@ -10,15 +10,27 @@ formInput.addEventListener("submit", () => {
     nameInput.classList.add("error");
   } else {
     nameInput.classList.remove("error");
-    socket.emit('chat', `${nameInput.value}: ${chatInput.value}`);
+    const message = {
+      name: nameInput.value,
+      content: chatInput.value,
+      room: window.location.pathname,
+    }
+    socket.emit('chat', JSON.stringify(message));
     chatInput.value = "";
     chatInput.focus();
   }
 });
 
 socket.on('broadcast', (d) => {
+  messageData = JSON.parse(d);
   const newChat = document.createElement('div');
-  newChat.innerText = d;
+  newChat.innerText = `${messageData.name}: ${messageData.content}`;
   chat.append(newChat);
   chat.scrollTo(0, chat.scrollHeight);
+});
+
+socket.emit('joinroom', window.location.pathname);
+
+socket.on("new user", function(data) {
+    console.log("New user. Total users: ", data);
 });
